@@ -14,7 +14,7 @@ MZBench is:
 
  - **Cloud-aware:** MZBench allocates nodes directly from Amazon EC2. 
  - **Scalable:** tested with 100 nodes and millions of connections.
- - **Extendable:** write your own [cloud plugins](cloud_plugin#how-to-write-a-cloud-plugin) and [workers](workers.md#how-to-write-a-worker). 
+ - **Extendable:** write your own [cloud plugins](cloud_plugins.md#how-to-write-a-cloud-plugin) and [workers](workers.md#how-to-write-a-worker). 
  - **Open-source:** MZBench is released under the [BSD license](https://github.com/machinezone/mzbench/blob/master/LICENSE).
 
 [Read the docs →](https://machinezone.github.io/mzbench)
@@ -68,6 +68,7 @@ Go to [localhost:4800](http://localhost:4800) and see the benchmark live status:
 ## Read Next
 
  - [How to write scenarios →](doc/scenarios.md)
- - [How to control MZBench from command line →](doc/server_api.md)
- - [How to deploy MZBench →](doc/deployment_guide.md)
+ - [How to control MZBench from command line →](doc/cli.md)
+ - [How to deploy MZBench →](doc/deployment.md)
  - [How to write your own worker →](doc/workers.md#how-to-write-a-worker)
+
