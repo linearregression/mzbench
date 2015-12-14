@@ -94,7 +94,7 @@ class MetricsStore extends EventEmitter {
     }
 
     addSubscription(metrics) {
-        MZBenchActions.sendSubscribe(data.benchId, metrics, data.guid);
+            MZBenchActions.sendSubscribe(data.benchId, metrics, data.guid);
     }
 
     changeCurrentBench(benchId, GUID) {
