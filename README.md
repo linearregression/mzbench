@@ -1,4 +1,4 @@
-# Welcome to MZBench [![Build Status](https://travis-ci.org/machinezone/mzbench.svg?branch=master)](https://travis-ci.org/machinezone/mzbench)
+# Welcome to MZBench [![Build Status](https://travis-ci.org/linearregression/mzbench.svg?branch=master)](https://travis-ci.org/linearregression/mzbench)
 
 ***Expressive, scalable load testing tool***
 
