@@ -19,16 +19,16 @@ script_metrics(Pools, _WorkerNodes) ->
     MZBenchInternal = [{group, "MZBench Internals",
                         WorkerStatusGraphs ++
                         [
-                          {graph, #{title => "Metric merging time",
-                                    units => "ms",
-                                    metrics => [{"metric_merging_time", gauge}]}},
                           {graph, #{title => "Errors",
                                     metrics => [{"errors", counter}]}},
                           {graph, #{title => "Logs",
                                     metrics => [{"logs.written", counter},
                                                 {"logs.dropped.mailbox_overflow", counter},
                                                 {"logs.dropped.rate_limiter", counter}
-                                                ]}}
+                                                ]}},
+                          {graph, #{title => "Metric merging time",
+                                    units => "ms",
+                                    metrics => [{"metric_merging_time", gauge}]}}
                         ]}],
 
     SystemLoadMetrics = mzb_system_load_monitor:metric_names([node() | nodes()]),
@@ -59,9 +59,7 @@ metrics(Path, EnvFromClient) ->
 
     ScriptMetrics = script_metrics(Pools, Nodes),
 
-    MetricJson = #{ groups => build_metric_groups_json(ScriptMetrics) },
-
-    mzb_string:str_to_bstr(MetricJson).
+    #{ groups => build_metric_groups_json(ScriptMetrics) }.
 
 %% normalize any user metrics to inner format
 
@@ -146,10 +144,9 @@ build_metric_groups_json(Groups) ->
         NewGraphs = lists:map(fun ({graph, GraphOpts}) ->
             Metrics = mzb_bc:maps_get(metrics, GraphOpts, []),
 
-            MetricMap = lists:flatmap(fun({Name, Type, Opts}) ->
-                DPs = [mzb_metrics:datapoint2str(DP) || DP <- mzb_metrics:datapoints(Type)],
+            MetricMap = lists:flatmap(fun({Name, _Type, Opts}) ->
                 Opts1 = mzb_bc:maps_without([rps, worker], Opts),
-                [Opts1#{name => (Name ++ "."++ S)} || S <- DPs]
+                [Opts1#{name => Name}]
             end, Metrics),
 
             GraphOpts1 = maybe_append_rps_units(GraphOpts, Metrics),
